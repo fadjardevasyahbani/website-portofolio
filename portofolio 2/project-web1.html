@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | Event Organizer • Web Developer • Graphic Designer</title>
+    <meta name="description" content="Professional portfolio showcasing expertise in Event Organization, Web Development, and Graphic Design.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Page Specific Styles -->
+    <style>
+        /* ==========================================
+           PROJECT DETAIL - REFINED STYLES
+           ========================================== */
+
+        /* 1. Hero Section */
+        .project-hero {
+            padding-top: 120px;
+            padding-bottom: 80px;
+            background-color: var(--bg-secondary);
+            position: relative;
+            overflow: visible !important; /* PENTING: Agar gambar tidak terpotong */
+            z-index: 1; /* Agar hero di atas konten berikutnya saat overlap */
+        }
+
+        /* Decorative Background Gradient */
+        .project-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 80%;
+            height: 150%;
+            background: radial-gradient(circle, var(--accent-glow) 0%, transparent 70%);
+            opacity: 0.15;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .back-btn:hover {
+            color: var(--accent);
+            gap: 12px;
+        }
+
+        .project-header-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-title {
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            line-height: 1.05;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+        }
+
+        .project-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 32px;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .tag {
+            padding: 8px 16px;
+            background-color: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 100px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        /* Image Container with Depth */
+        .hero-image-wrapper {
+            position: relative;
+            transform: translateY(60px); /* Geser ke bawah */
+            z-index: 5; /* Z-index tinggi agar muncul di atas */
+        }
+
+        .hero-image-card {
+            background: var(--bg-card);
+            border-radius: var(--radius-xl);
+            box-shadow: 0 40px 80px -20px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            position: relative;
+        }
+
+        .hero-image-card img {
+            width: 100%;
+            display: block;
+            transition: transform 0.6s ease;
+        }
+
+        .hero-image-card:hover img {
+            transform: scale(1.03);
+        }
+
+        /* 2. Content Section */
+        .project-content {
+            padding: 120px 0;
+            background: var(--bg-primary); /* Background solid menutupi belakang gambar */
+            position: relative;
+            z-index: 2; /* Di bawah hero image tapi di atas background body */
+            margin-top: 0; /* Hilangkan gap agar natural */
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 80px;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: sticky;
+            top: 120px;
+            height: fit-content;
+        }
+
+        .info-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            padding: 28px;
+            border-radius: var(--radius-lg);
+            margin-bottom: 24px;
+        }
+
+        .info-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .info-value {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .tech-stack-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .tech-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+        }
+        
+        .tech-item::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        /* Main Body Styles */
+        .content-body h2 {
+            font-size: 2rem;
+            margin-top: 48px;
+            margin-bottom: 24px;
+            color: var(--text-primary);
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .content-body h2::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 8px;
+            bottom: 8px;
+            width: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .content-body p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        /* Feature Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin: 40px 0;
+        }
+
+        .feature-card {
+            background: var(--bg-secondary);
+            padding: 32px;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .feature-card:hover::after {
+            opacity: 1;
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--accent-glow);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .feature-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--accent);
+        }
+
+        .feature-card h3 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 1024px) {
+            .project-header-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .hero-image-wrapper {
+                transform: translateY(20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .sidebar {
+                position: relative;
+                top: 0;
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+            .info-card {
+                margin: 0;
+            }
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar scrolled" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <span class="logo-text">Portfolio</span>
+            </a>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html#home" class="nav-link">Home</a></li>
+                <li><a href="index.html#about" class="nav-link">About</a></li>
+                <li><a href="index.html#portfolio" class="nav-link active">Portfolio</a></li>
+                <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+            </ul>
+            
+            <div class="nav-actions">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="5"/>
+                        <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/>
+                    </svg>
+                    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                    </svg>
+                </button>
+                
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="project-hero">
+        <div class="container">
+            <a href="index.html#portfolio" class="back-btn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Back to Projects
+            </a>
+
+            <div class="project-header-grid">
+                <!-- Left Column: Text -->
+                <div>
+                    <div class="project-tags">
+                        <span class="tag">Web Development</span>
+                        <span class="tag">Company Profile</span>
+                        <span class="tag">Training Platform</span>
+                    </div>
+                    <h1 class="project-title">P3I Edukasi</h1>
+                    <p class="project-subtitle">
+                       Platform website lembaga pelatihan profesional yang dirancang untuk menampilkan 
+                       program kelas offline dan online secara terstruktur. Website ini memudahkan pengguna 
+                       dalam mengakses informasi pelatihan, melihat jadwal, dan melakukan pendaftaran dengan 
+                       tampilan yang modern, responsif, dan user-friendly.
+                    </p>
+                    <div class="hero-cta" style="margin-top: 32px;">
+                        <a href="https://p3iedukasi.com/" target="_blank" class="btn btn-primary-glow">
+                            <span>Live Demo</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
+                        <a href="#" class="btn btn-outline-premium">
+                            <span>Source Code</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Right Column: Image -->
+                <div class="hero-image-wrapper">
+                    <div class="hero-image-card">
+                        <img src="foto project/Project 1.png" alt="P3I Edukasi">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTENT SECTION -->
+    <section class="project-content">
+        <div class="container">
+            <div class="content-grid">
+                
+                <!-- Sidebar -->
+                <aside class="sidebar">
+                    <div class="info-card">
+                        <span class="info-label">Role</span>
+                        <span class="info-value">Frontend Developer</span>
+                    </div>
+                    <div class="info-card">
+                        <span class="info-label">Year</span>
+                        <span class="info-value">2025</span>
+                    </div>
+                    <div class="info-card">
+                        <span class="info-label">Tech Stack</span>
+                        <div class="tech-stack-list">
+                            <div class="tech-item">WordPress</div>
+                            <div class="tech-item">Elementor</div>
+                            <div class="tech-item">Plugin Integration</div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Content -->
+                <div class="content-body">
+                    <h2>Project Overview</h2>
+                    <p>
+                        <strong>P3I Edukasi</strong> merupakan website company profile sekaligus platform informasi pelatihan 
+                        untuk Lembaga Pusat Pengembangan Profesi Indonesia (P3I). Website ini dikembangkan untuk meningkatkan 
+                        kredibilitas lembaga serta mempermudah calon peserta dalam menemukan program pelatihan yang sesuai 
+                        dengan kebutuhan mereka.
+                        Fokus utama dalam pengembangan website ini adalah membangun struktur informasi yang jelas, navigasi yang intuitif, serta desain visual yang profesional untuk meningkatkan kenyamanan pengguna saat menjelajah website.
+                    </p>
+                    
+                    <!-- Key Features Section -->
+                    <h2>Key Features</h2>
+                    <p>Platform ini dilengkapi dengan berbagai fitur utama untuk mendukung kebutuhan pengguna:</p>
+                    
+                    <div class="features-grid">
+                        <!-- Feature 1 -->
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="3" width="18" height="18" rx="2"/>
+                                    <path d="M3 9h18"/>
+                                </svg>
+                            </div>
+                            <h3>Homepage Design</h3>
+                            <p>Menampilkan informasi utama lembaga, highlight program unggulan, serta Call-to-Action yang mengarahkan pengguna ke halaman pelatihan.</p>
+                        </div>
+
+                        <!-- Feature 2 -->
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/>
+                                </svg>
+                            </div>
+                            <h3>Category Training</h3>
+                            <p>Pengguna dapat memilih kelas berdasarkan kategori seperti Offline Class dan Online Class dengan tampilan yang terstruktur.</p>
+                        </div>
+
+                        <!-- Feature 3 -->
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                    <polyline points="14 2 14 8 20 8"/>
+                                </svg>
+                            </div>
+                            <h3>Program Details</h3>
+                            <p>Setiap pelatihan memiliki halaman detail berisi deskripsi, benefit, jadwal, dan informasi penting lainnya.</p>
+                        </div>
+
+                        <!-- Feature 4 -->
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="1" y="4" width="22" height="16" rx="2"/>
+                                    <line x1="1" y1="10" x2="23" y2="10"/>
+                                </svg>
+                            </div>
+                            <h3>Navigasi Responsif</h3>
+                            <p>Tampilan optimal di berbagai perangkat (desktop, tablet, dan mobile).</p>
+                        </div>
+
+                        <!-- Feature 5 -->
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                            </div>
+                            <h3>Call-to-Action (CTA) Terintegrasi</h3>
+                            <p>Tombol aksi seperti “Lihat Selengkapnya” dan “Daftar Sekarang” untuk meningkatkan konversi.</p>
+                        </div>
+                    </div>
+                </div>
+            </div> <!-- End content-grid -->
+        </div> <!-- End container -->
+    </section> <!-- End project-content -->
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-bottom" style="border-top: none; padding-top: 0;">
+                <p>&copy; 2025 Portfolio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+        // Simple Reveal Animation on Scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.feature-card, .full-width-image, .content-body h2').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
